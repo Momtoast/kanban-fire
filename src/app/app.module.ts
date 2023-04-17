@@ -13,12 +13,22 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { TaskDialogResult } from './task-dialog/task-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent, TaskComponent, TaskDialogComponent],
   imports: [BrowserModule, MatToolbarModule, MatIconModule, MatCardModule, DragDropModule, MatButtonModule,
-    MatDialogModule, MatInputModule, FormsModule],
+    MatDialogModule, MatInputModule, FormsModule, AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule],
   providers: [],
   bootstrap: [AppComponent],
 })
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 export class AppModule {}
